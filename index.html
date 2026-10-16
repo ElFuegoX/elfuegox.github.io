@@ -753,13 +753,6 @@
 
         <!-- SECTION 1: HERO & PRÉSENTATION -->
         <section class="flex flex-col gap-6 pt-10 lg:pt-0 reveal active" id="hero">
-          <!-- Availability Badge -->
-          <div
-            class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 w-fit">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-dot"></span>
-            <span class="text-xs font-medium text-emerald-400">Disponible pour stages, missions et collaborations</span>
-          </div>
-
           <!-- Nom & Titre -->
           <div class="flex flex-col gap-2">
             <!-- H1 with Hover Reveal -->
@@ -779,7 +772,7 @@
           </div>
 
           <!-- Paragraphe (gauche) + Photo agrandie (droite) -->
-          <div class="flex flex-col sm:flex-row items-start gap-8">
+          <div class="flex flex-col sm:flex-row items-center sm:items-start gap-8">
             <p class="flex-1 text-base sm:text-[17px] text-[var(--text-secondary)] leading-relaxed font-normal">
               Je suis en 3ᵉ année de licence en Intelligence Artificielle à l'IFRI (Université d'Abomey-Calavi, Bénin).
               Ce
@@ -791,11 +784,11 @@
               objectif est simple : construire des outils fiables, bien pensés, et qui rendent un vrai service.
             </p>
 
-            <!-- Photo Personnelle (cliquable avec modale) -->
+            <!-- Photo Personnelle (cliquable avec modale, un peu plus grande que le paragraphe) -->
             <button id="open-photo-modal" type="button" aria-label="Agrandir la photo"
               class="relative group shrink-0 cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded-2xl">
               <div onclick="document.getElementById('photo-modal').showModal()"
-                class="w-50 h-60 sm:w-64 sm:h-64 rounded-2xl overflow-hidden border-2 border-[var(--border)] group-hover:border-[var(--accent)] transition-all duration-300 flame-glow bg-[var(--bg-surface)] flex items-center justify-center relative cursor-pointer">
+                class="w-64 h-72 sm:w-72 sm:h-80 md:w-80 md:h-96 rounded-2xl overflow-hidden border-2 border-[var(--border)] group-hover:border-[var(--accent)] transition-all duration-300 flame-glow bg-[var(--bg-surface)] flex items-center justify-center relative cursor-pointer">
                 <img src="moiIndaba.jpeg" alt="Mélon Joanès AFAGNIBO"
                   class="w-full h-full object-cover object-[50%_15%] group-hover:scale-105 transition-transform duration-500 ease-out"
                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
