@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="color-scheme" content="dark light" />
+  <!-- Anti-FOUC & Fond critique : appliqué AVANT tout appel réseau / polices distantes -->
+  <style>
+    html,
+    body {
+      background-color: #0B0F14;
+      color: #E6EDF3;
+    }
+
+    html.light,
+    html.light body {
+      background-color: #ffffffd3 !important;
+      color: #0F172A !important;
+    }
+
+    html.light #logo-mobile,
+    html.light #logo-desktop {
+      content: url('logo_mj_light.webp');
+    }
+  </style>
+  <script>
+    (function () {
+      var t = localStorage.getItem('theme');
+      var isLight = (t === 'light');
+      var html = document.documentElement;
+      if (isLight) {
+        html.classList.remove('dark');
+        html.classList.add('light');
+        html.style.backgroundColor = '#D4C9B8';
+      } else {
+        html.classList.remove('light');
+        html.classList.add('dark');
+        html.style.backgroundColor = '#0B0F14';
+      }
+    })();
+  </script>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Mélon Joanès AFAGNIBO — Fullstack Web Developer · AI & Data Enthusiast</title>
+
+  <!-- Favicon (Logo MJ comme icône du site) -->
+  <link rel="icon" type="image/png" href="favicon-dark.png" />
+  <link rel="preload" as="image" href="moiIndaba.webp" type="image/webp" fetchpriority="high" />
+
+  <!-- SEO -->
+  <meta name="description"
+    content="Portfolio of Mélon Joanès AFAGNIBO — AI student at IFRI, Fullstack Web Developer. Projects: XoNet, VoiceNote, Thomas, DM Arena." />
+  <meta name="author" content="Mélon Joanès AFAGNIBO" />
+  <link rel="canonical" href="https://elfuegox.github.io/en.html" />
+  <link rel="alternate" hreflang="fr" href="https://elfuegox.github.io/" />
+  <link rel="alternate" hreflang="en" href="https://elfuegox.github.io/en.html" />
+  <link rel="alternate" hreflang="x-default" href="https://elfuegox.github.io/" />
+
+  <!-- Open Graph (LinkedIn, WhatsApp, Discord) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://elfuegox.github.io/en.html" />
+  <meta property="og:title" content="Mélon Joanès AFAGNIBO — Fullstack Dev & AI Enthusiast" />
+  <meta property="og:description"
+    content="AI Student at IFRI · Full-Stack Developer · Projects: XoNet, VoiceNote, Thomas, DM Arena." />
+  <meta property="og:image" content="https://elfuegox.github.io/moiIndaba.jpeg" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Mélon Joanès AFAGNIBO — Fullstack Dev & AI" />
+  <meta name="twitter:description" content="AI Student at IFRI · Full-Stack Developer" />
+  <meta name="twitter:image" content="https://elfuegox.github.io/moiIndaba.jpeg" />
+
+
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://api.fontshare.com" rel="preconnect" />
+  <link crossorigin="" href="https://cdn.fontshare.com" rel="preconnect" />
+  <link href="https://unpkg.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=optional"
+    rel="stylesheet" />
+  <!-- Clash Display (Fontshare Premium CDN - très utilisé sur Awwwards & Fintech IA) -->
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=optional" rel="stylesheet">
+
+  <!-- Lenis Smooth Scroll -->
+  <script defer src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+  <style>
+    @view-transition {
+      navigation: auto;
+    }
+
+    :root {
+      --bg-body: #0B0F14;
+      --bg-surface: #111820;
+      --bg-surface-hover: #1A2332;
+      --border: #1E2A36;
+      --border-accent: rgba(255, 107, 53, 0.4);
+      --text-primary: #E6EDF3;
+      --text-secondary: #8B949E;
+      --text-tertiary: #6E7681;
+      --accent: #FF6B35;
+      --accent-hover: #FF8552;
+      --flame: #FF6B35;
+      --glow: rgba(255, 107, 53, 0.25);
+    }
+
+    html.light,
+    html.light body {
+      --bg-body: #ceccc9 !important;
+      --bg-surface: #c5c2be !important;
+      --bg-surface-hover: #d9d8d6 !important;
+      --border: #CBD5E1 !important;
+      --border-accent: rgba(2, 132, 199, 0.6) !important;
+      --text-primary: #0F172A !important;
+      --text-secondary: #334155 !important;
+      --text-tertiary: #64748B !important;
+      --accent: #0e96dac0 !important;
+      --accent-hover: #6faed0 !important;
+      --flame: #04709e !important;
+      --glow: rgba(2, 132, 199, 0.32) !important;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-primary);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Icônes SVG inline (remplacent la police Material Symbols : 0 requête réseau) */
+    .icon {
+      width: 1em;
+      height: 1em;
+      fill: currentColor;
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    body.theme-ready {
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Option 2: Clash Display pour des titres puissants & identitaires */
+    h1,
+    h2,
+    h3,
+    .font-display {
+      font-family: 'Clash Display', 'Plus Jakarta Sans', sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    /* Accents éditoriaux / prestige */
+    .font-serif-title,
+    .font-editorial {
+      font-family: 'Fraunces', Georgia, serif;
+    }
+
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Dashed separator visible & soyeux dans les deux modes */
+    .dashed-sep {
+      border-bottom: 1px dashed var(--accent);
+      opacity: 0.4;
+    }
+
+    html:not(.dark) .dashed-sep,
+    html.light .dashed-sep {
+      opacity: 0.75 !important;
+      border-bottom: 1.5px dashed var(--accent) !important;
+    }
+
+    /* Bordure droite de la sidebar fixe garantie nette */
+    aside {
+      border-right: 1px solid var(--border) !important;
+    }
+
+    /* Header mobile fixe garanti net */
+    header {
+      border-bottom: 1px solid var(--border) !important;
+    }
+
+    /* Bordure du footer connect hub */
+    footer {
+      border-color: var(--accent) !important;
+    }
+
+    /* Sélection de texte dynamique Awwwards (Orange en sombre, Bleu Azur en clair) */
+    ::selection {
+      background-color: var(--accent) !important;
+      color: #FFFFFF !important;
+    }
+
+    ::-moz-selection {
+      background-color: var(--accent) !important;
+      color: #FFFFFF !important;
+    }
+
+    .dark ::selection {
+      background-color: rgba(255, 107, 53, 0.35) !important;
+      color: #FF8552 !important;
+    }
+
+    .dark ::-moz-selection {
+      background-color: rgba(255, 107, 53, 0.35) !important;
+      color: #FF8552 !important;
+    }
+
+    html:not(.dark) ::selection,
+    html.light ::selection {
+      background-color: rgba(2, 132, 199, 0.25) !important;
+      color: #0284C7 !important;
+    }
+
+    html:not(.dark) ::-moz-selection,
+    html.light ::-moz-selection {
+      background-color: rgba(2, 132, 199, 0.25) !important;
+      color: #0284C7 !important;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-body);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
+    }
+
+    /* Hover Reveal Text (Flip Name -> Alias) */
+    .name-reveal-container {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .name-reveal-primary {
+      display: inline-block;
+      color: var(--accent);
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .name-reveal-alias {
+      position: absolute;
+      left: 0;
+      top: 100%;
+      display: inline-block;
+      color: var(--accent);
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .name-reveal-container:hover .name-reveal-primary {
+      transform: translateY(-100%);
+    }
+
+    .name-reveal-container:hover .name-reveal-alias {
+      transform: translateY(-100%);
+    }
+
+    /* Flame Glow dynamique selon le mode actif */
+    .flame-glow {
+      box-shadow: 0 0 15px var(--glow);
+      transition: all 0.3s ease;
+    }
+
+    .flame-glow:hover {
+      box-shadow: 0 0 24px var(--glow);
+      transform: scale(1.05);
+    }
+
+    /* Ambient Cursor Spotlight (Awwwards effect) */
+    #ambient-spotlight {
+      background: radial-gradient(700px circle at var(--cursor-x, 50vw) var(--cursor-y, 40vh), var(--glow), transparent 70%);
+    }
+
+    html:not(.dark) #ambient-spotlight,
+    html.light #ambient-spotlight {
+      background: radial-gradient(750px circle at var(--cursor-x, 50vw) var(--cursor-y, 40vh), rgba(14, 165, 233, 0.18), transparent 68%) !important;
+    }
+
+    /* Dock styling for stack (Silky Spring Effect) */
+    .dock-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .dock-pill {
+      background-color: var(--bg-body);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      cursor: default;
+    }
+
+    .dock-pill:hover {
+      transform: translateY(-3px) scale(1.05);
+      border-color: var(--accent);
+      box-shadow: 0 8px 22px -4px var(--glow);
+      color: var(--accent);
+    }
+
+    /* Project Cards with Silky Lift & Top Glow Line */
+    .project-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-accent);
+      box-shadow: 0 20px 40px -12px var(--glow);
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-card .img-zoom {
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .project-card:hover .img-zoom {
+      transform: scale(1.04);
+    }
+
+    /* Pulse animation */
+    @keyframes subtlePulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(1.15);
+      }
+    }
+
+    .pulse-dot {
+      animation: subtlePulse 2s infinite ease-in-out;
+    }
+
+    /* Scroll spy active */
+    .nav-link.active {
+      color: var(--accent) !important;
+      border-left: 2px solid var(--accent);
+      padding-left: 12px;
+      background: var(--bg-surface-hover);
+    }
+
+    /* CV Preview Popover */
+    .cv-btn-wrapper {
+      position: relative;
+    }
+
+    .cv-preview-popup {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 0;
+      width: 250px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: all 0.25s ease;
+      z-index: 50;
+    }
+
+    /* Pont invisible pour que la souris ne perde pas le hover en montant */
+    .cv-preview-popup::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      height: 14px;
+    }
+
+    .cv-btn-wrapper:hover .cv-preview-popup,
+    .cv-preview-popup:hover {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    /* SCROLL ANIMATIONS HAUTE COUTURE (AWWWARDS SILK FEEL) */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px) scale(0.985);
+      filter: blur(4px);
+      transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease-out;
+      will-change: opacity, transform, filter;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0px);
+    }
+
+    /* TIMELINE ORGANIC SILK AESTHETICS (AWWWARDS TOP 1% FEEL) */
+    .timeline-item {
+      position: relative;
+    }
+
+    .timeline-dot {
+      transform: translate(-50%, 0) scale(0.45);
+      opacity: 0.35;
+      background-color: var(--bg-body);
+      border: 2px solid var(--border) !important;
+      box-shadow: none !important;
+      transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1),
+        opacity 0.8s ease-out,
+        border-color 0.8s ease,
+        background-color 0.8s ease,
+        box-shadow 1s cubic-bezier(0.19, 1, 0.22, 1);
+      will-change: transform, opacity, box-shadow;
+    }
+
+    .timeline-item.active .timeline-dot {
+      transform: translate(-50%, 0) scale(1.15);
+      opacity: 1;
+      border-color: var(--accent) !important;
+      background-color: var(--bg-surface) !important;
+      box-shadow: 0 0 0 5px var(--glow), 0 0 24px var(--glow) !important;
+    }
+
+    .dark .timeline-item.active .timeline-dot {
+      background-color: var(--bg-surface);
+    }
+
+    html:not(.dark) .timeline-item.active .timeline-dot,
+    html.light .timeline-item.active .timeline-dot {
+      background-color: #0F172A !important;
+    }
+
+    /* Entrée directionnelle organique (gauche vs droite) */
+    .timeline-item:nth-child(odd) .timeline-card {
+      opacity: 0;
+      transform: translate3d(-30px, 16px, 0) scale(0.975);
+      filter: blur(5px);
+      transition: opacity 1.2s cubic-bezier(0.19, 1, 0.22, 1),
+        transform 1.35s cubic-bezier(0.19, 1, 0.22, 1),
+        filter 1s ease-out;
+      will-change: opacity, transform, filter;
+    }
+
+    .timeline-item:nth-child(even) .timeline-card {
+      opacity: 0;
+      transform: translate3d(30px, 16px, 0) scale(0.975);
+      filter: blur(5px);
+      transition: opacity 1.2s cubic-bezier(0.19, 1, 0.22, 1),
+        transform 1.35s cubic-bezier(0.19, 1, 0.22, 1),
+        filter 1s ease-out;
+      will-change: opacity, transform, filter;
+    }
+
+    @media (max-width: 767px) {
+
+      .timeline-item:nth-child(odd) .timeline-card,
+      .timeline-item:nth-child(even) .timeline-card {
+        transform: translate3d(0, 24px, 0) scale(0.98);
+      }
+    }
+
+    .timeline-item.active .timeline-card {
+      opacity: 1 !important;
+      transform: translate3d(0, 0, 0) scale(1) !important;
+      filter: blur(0px) !important;
+    }
+
+    /* Transition de sortie soyeuse si scroll arrière */
+    .timeline-item:not(.active) .timeline-card {
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out, filter 0.8s ease-out;
+      transition-delay: 0s !important;
+    }
+
+    .timeline-item:not(.active) .timeline-dot {
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out, box-shadow 0.8s ease-out;
+      transition-delay: 0s !important;
+    }
+
+    /* Stagger transitions — utilisées sur les colonnes stack */
+    .stagger-1 {
+      transition-delay: 0.05s;
+    }
+
+    .stagger-2 {
+      transition-delay: 0.15s;
+    }
+
+    .stagger-3 {
+      transition-delay: 0.25s;
+    }
+
+    .stagger-4 {
+      transition-delay: 0.35s;
+    }
+
+    /* Stagger spéciaux pour les groupes (projets, timeline) */
+    /* Appliqués via JS dynamiquement */
+    .seq-1 {
+      transition-delay: 0s;
+    }
+
+    .seq-2 {
+      transition-delay: 0.15s;
+    }
+
+    .seq-3 {
+      transition-delay: 0.3s;
+    }
+
+    .seq-4 {
+      transition-delay: 0.45s;
+    }
+  </style>
+
+  <link rel="stylesheet" href="css/tailwind.css" />
+</head>
+
+<body class="relative">
+
+  <!-- Sprite d'icônes SVG (Material Symbols Outlined, embarquées) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="i-light_mode" viewBox="0 -960 960 960"><path d="M565-395q35-35 35-85t-35-85q-35-35-85-35t-85 35q-35 35-35 85t35 85q35 35 85 35t85-35Zm-226.5 56.5Q280-397 280-480t58.5-141.5Q397-680 480-680t141.5 58.5Q680-563 680-480t-58.5 141.5Q563-280 480-280t-141.5-58.5ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Zm326-268Z"/></symbol>
+    <symbol id="i-dark_mode" viewBox="0 -960 960 960"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Zm0-80q88 0 158-48.5T740-375q-20 5-40 8t-40 3q-123 0-209.5-86.5T364-660q0-20 3-40t8-40q-78 32-126.5 102T200-480q0 116 82 198t198 82Zm-10-270Z"/></symbol>
+    <symbol id="i-menu" viewBox="0 -960 960 960"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></symbol>
+    <symbol id="i-close" viewBox="0 -960 960 960"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></symbol>
+    <symbol id="i-visibility" viewBox="0 -960 960 960"><path d="M607.5-372.5Q660-425 660-500t-52.5-127.5Q555-680 480-680t-127.5 52.5Q300-575 300-500t52.5 127.5Q405-320 480-320t127.5-52.5Zm-204-51Q372-455 372-500t31.5-76.5Q435-608 480-608t76.5 31.5Q588-545 588-500t-31.5 76.5Q525-392 480-392t-76.5-31.5ZM214-281.5Q94-363 40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200q-146 0-266-81.5ZM480-500Zm207.5 160.5Q782-399 832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280q113 0 207.5-59.5Z"/></symbol>
+    <symbol id="i-download" viewBox="0 -960 960 960"><path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></symbol>
+    <symbol id="i-picture_as_pdf" viewBox="0 -960 960 960"><path d="M360-460h40v-80h40q17 0 28.5-11.5T480-580v-40q0-17-11.5-28.5T440-660h-80v200Zm40-120v-40h40v40h-40Zm120 120h80q17 0 28.5-11.5T640-500v-120q0-17-11.5-28.5T600-660h-80v200Zm40-40v-120h40v120h-40Zm120 40h40v-80h40v-40h-40v-40h40v-40h-80v200ZM320-240q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></symbol>
+    <symbol id="i-open_in_new" viewBox="0 -960 960 960"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"/></symbol>
+    <symbol id="i-description" viewBox="0 -960 960 960"><path d="M320-240h320v-80H320v80Zm0-160h320v-80H320v80ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z"/></symbol>
+    <symbol id="i-mail" viewBox="0 -960 960 960"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z"/></symbol>
+    <symbol id="i-account_circle" viewBox="0 -960 960 960"><path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm146.5-204.5Q340-521 340-580t40.5-99.5Q421-720 480-720t99.5 40.5Q620-639 620-580t-40.5 99.5Q539-440 480-440t-99.5-40.5ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm100-95.5q47-15.5 86-44.5-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160q53 0 100-15.5ZM523-537q17-17 17-43t-17-43q-17-17-43-17t-43 17q-17 17-17 43t17 43q17 17 43 17t43-17Zm-43-43Zm0 360Z"/></symbol>
+    <symbol id="i-code" viewBox="0 -960 960 960"><path d="M320-240 80-480l240-240 57 57-184 184 183 183-56 56Zm320 0-57-57 184-184-183-183 56-56 240 240-240 240Z"/></symbol>
+  </svg>
+
+  <!-- Awwwards Ambient Cursor Spotlight -->
+  <div id="ambient-spotlight" class="pointer-events-none fixed inset-0 z-10 transition-opacity duration-700"></div>
+
+  <!-- Mobile Header (<1024px) -->
+  <header
+    class="lg:hidden fixed top-0 left-0 right-0 z-40 bg-[var(--bg-body)]/90 backdrop-blur-md border-b border-[var(--border)] px-6 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <img id="logo-mobile" src="logo_mj.webp" alt="MJ Logo" width="32" height="32" decoding="sync"
+        class="w-8 h-8 rounded-lg object-cover border border-[var(--border)] shadow-sm" />
+      <span class="font-bold text-sm text-[var(--text-primary)]">Mélon Joanès AFAGNIBO</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="index.html" id="lang-toggle-mobile" aria-label="Version française"
+        class="px-2 py-1 rounded-lg bg-[var(--bg-surface)] text-[var(--text-secondary)] font-mono-code text-xs hover:text-[var(--text-primary)] transition-colors">
+        FR | <span class="text-[var(--accent)] font-semibold">EN</span>
+      </a>
+      <button id="theme-toggle-mobile" aria-label="Toggle theme"
+        class="p-2 rounded-lg bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]">
+        <svg class="icon text-lg" id="theme-icon-mobile" aria-hidden="true"><use href="#i-light_mode"/></svg>
+      </button>
+      <button id="mobile-menu-btn" aria-label="Open menu"
+        class="p-2 rounded-lg bg-[var(--bg-surface)] text-[var(--text-secondary)]">
+        <svg class="icon text-2xl" aria-hidden="true"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-drawer"
+    class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden lg:hidden flex flex-col justify-between p-8">
+    <div class="flex flex-col gap-6">
+      <div class="flex items-center justify-between">
+        <span class="text-xl font-bold text-[var(--text-primary)]">Navigation</span>
+        <button id="close-drawer-btn" class="p-2 text-[var(--text-secondary)] hover:text-white" aria-label="Close menu">
+          <svg class="icon text-2xl" aria-hidden="true"><use href="#i-close"/></svg>
+        </button>
+      </div>
+      <nav class="flex flex-col gap-4 text-lg">
+        <a class="drawer-link py-2 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
+          href="#hero">Home</a>
+        <a class="drawer-link py-2 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
+          href="#projets">Projects</a>
+        <a class="drawer-link py-2 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
+          href="#stack">Stack</a>
+        <a class="drawer-link py-2 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
+          href="#parcours">Journey</a>
+      </nav>
+    </div>
+    <div class="grid grid-cols-2 gap-2">
+      <button type="button"
+        onclick="document.getElementById('cv-modal').showModal(); document.getElementById('mobile-drawer')?.classList.add('hidden');"
+        class="py-3 px-2 rounded-xl bg-[var(--bg-surface)] text-center font-medium border border-[var(--border)] text-[var(--text-primary)] hover:border-[var(--accent)] transition-colors flex items-center justify-center gap-1.5 text-xs sm:text-sm cursor-pointer">
+        <svg class="icon text-base text-[var(--accent)]" aria-hidden="true"><use href="#i-visibility"/></svg>
+        <span>Preview CV</span>
+      </button>
+      <a href="CV_Melon_Joanes_AFAGNIBO_EN.pdf" download="CV_Melon_Joanes_AFAGNIBO_EN.pdf"
+        class="py-3 px-2 rounded-xl bg-[var(--accent)] text-center font-medium text-white hover:opacity-90 transition-opacity flex items-center justify-center gap-1.5 text-xs sm:text-sm shadow-sm">
+        <svg class="icon text-base" aria-hidden="true"><use href="#i-download"/></svg>
+        <span>Download</span>
+      </a>
+    </div>
+    <div class="flex justify-center gap-6 text-[var(--text-secondary)]">
+      <a href="https://github.com/ElFuegoX" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://linkedin.com/in/melon-joanes-afagnibo" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="mailto:afagnibomelonjoanes@gmail.com">Email</a>
+    </div>
+  </div>
+
+  <div class="min-h-screen flex flex-col lg:flex-row">
+    <!-- Desktop Sticky Sidebar (Left, ~320px) -->
+    <aside
+      class="w-full lg:w-[320px] lg:fixed lg:top-0 lg:bottom-0 lg:left-0 z-30 bg-[var(--bg-body)]/95 backdrop-blur-md border-r border-[var(--border)] flex flex-col justify-between p-8 overflow-y-auto hidden lg:flex">
+      <div class="flex flex-col gap-8">
+        <!-- Logo MJ & Live Local Time (Awwwards Studio Status) -->
+        <div class="flex items-center justify-between">
+          <a href="#hero" class="block group" title="Mélon Joanès AFAGNIBO">
+            <img id="logo-desktop" src="logo_mj.webp" alt="MJ Logo" width="40" height="40" decoding="sync"
+              class="w-10 h-10 rounded-xl object-cover border border-[var(--border)] group-hover:border-[var(--accent)] transition-all duration-300 flame-glow" />
+          </a>
+          <div
+            class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--bg-surface)] border border-[var(--border)] font-mono-code text-[11px] text-[var(--text-secondary)] shadow-sm"
+            title="Live local time · Benin (UTC+1)">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span>
+            <span class="text-[var(--text-tertiary)]">BJ</span>
+            <span class="text-[var(--border)]">·</span>
+            <span id="live-clock" class="font-medium text-[var(--text-primary)]">--:--</span>
+            <span class="text-[10px] text-[var(--text-tertiary)]">WAT</span>
+          </div>
+        </div>
+
+        <!-- Identity -->
+        <div>
+          <div class="name-reveal-container" title="Hover to reveal alias">
+            <span class="name-reveal-primary font-bold text-xl text-[var(--accent)]">Mélon Joanès AFAGNIBO</span>
+            <span class="name-reveal-alias font-bold text-xl text-[var(--accent)]">ElFuegoX</span>
+          </div>
+          <p class="mt-2 text-sm text-[var(--text-primary)] font-semibold">Fullstack Web Developer</p>
+          <p class="mt-1 text-sm text-[var(--text-primary)] font-semibold">AI & Data Enthusiast</p>
+          <p class="mt-2 text-xs text-[var(--text-secondary)] font-medium">IFRI · University of Abomey-Calavi</p>
+        </div>
+        <div class="dashed-sep"></div>
+
+        <!-- Navigation Links -->
+        <nav class="flex flex-col gap-3 text-sm" id="desktop-nav">
+          <a class="nav-link py-2.5 px-3 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)] transition-all flex items-center gap-3 active"
+            href="#projets">
+            <span class="font-medium">Projects</span>
+          </a>
+          <a class="nav-link py-2.5 px-3 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)] transition-all flex items-center gap-3"
+            href="#stack">
+            <span class="font-medium">Stack</span>
+          </a>
+          <a class="nav-link py-2.5 px-3 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)] transition-all flex items-center gap-3"
+            href="#parcours">
+            <span class="font-medium">Journey</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Bottom Actions & Social -->
+      <div class="flex flex-col gap-5 pt-6">
+        <div class="dashed-sep"></div>
+
+        <!-- CV Button with Preview Popover -->
+        <div class="cv-btn-wrapper">
+          <div class="cv-preview-popup">
+            <div class="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-1.5">CV Preview</div>
+            <div
+              class="h-28 bg-[var(--bg-body)] rounded border border-[var(--border)] flex flex-col items-center justify-center p-2 text-center">
+              <svg class="icon text-3xl text-[var(--accent)] mb-1" aria-hidden="true"><use href="#i-picture_as_pdf"/></svg>
+              <span class="text-xs font-medium text-[var(--text-primary)]">Mélon Joanès AFAGNIBO</span>
+              <span class="text-[10px] text-[var(--text-tertiary)]">PDF Format · EN Version</span>
+            </div>
+            <div class="mt-2 flex gap-1.5 text-[11px]">
+              <button type="button" onclick="document.getElementById('cv-modal').showModal()"
+                class="text-[var(--accent)] hover:underline flex items-center gap-0.5 cursor-pointer font-medium">
+                <svg class="icon text-xs" aria-hidden="true"><use href="#i-open_in_new"/></svg> Open
+              </button>
+              <span class="text-[var(--text-tertiary)]">·</span>
+              <a href="CV_Melon_Joanes_AFAGNIBO_EN.pdf" download="CV_Melon_Joanes_AFAGNIBO_EN.pdf"
+                class="text-[var(--text-secondary)] hover:underline flex items-center gap-0.5 cursor-pointer font-medium">
+                <svg class="icon text-xs" aria-hidden="true"><use href="#i-download"/></svg> Download
+              </a>
+            </div>
+          </div>
+
+          <a href="CV_Melon_Joanes_AFAGNIBO_EN.pdf" download="CV_Melon_Joanes_AFAGNIBO_EN.pdf"
+            class="inline-flex items-center justify-between w-full px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] hover:bg-[var(--bg-surface-hover)] text-[var(--text-primary)] text-sm font-medium border border-[var(--border)] transition-colors group">
+            <span class="flex items-center gap-2">
+              <svg class="icon text-base text-[var(--accent)]" aria-hidden="true"><use href="#i-description"/></svg>
+              <span>Download Resume</span>
+            </span>
+            <svg
+              class="icon text-sm text-[var(--text-tertiary)] group-hover:translate-y-0.5 transition-transform" aria-hidden="true"><use href="#i-download"/></svg>
+          </a>
+        </div>
+
+        <div class="dashed-sep"></div>
+
+        <!-- Toggles & Social Links -->
+        <div class="flex items-center justify-between">
+          <!-- Social Icons -->
+          <div class="flex items-center gap-2">
+            <a href="https://github.com/ElFuegoX" target="_blank" rel="noopener noreferrer"
+              class="p-2 rounded-lg text-[var(--text-secondary)] hover:text-[var(--accent)] hover:bg-[var(--bg-surface)] transition-all"
+              title="GitHub">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path
+                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+              </svg>
+            </a>
+            <a href="https://linkedin.com/in/melon-joanes-afagnibo" target="_blank" rel="noopener noreferrer"
+              class="p-2 rounded-lg text-[var(--text-secondary)] hover:text-[var(--accent)] hover:bg-[var(--bg-surface)] transition-all"
+              title="LinkedIn">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path
+                  d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451c.979 0 1.778-.773 1.778-1.729V1.73C24 .774 23.205 0 22.225 0z" />
+              </svg>
+            </a>
+            <a href="mailto:afagnibomelonjoanes@gmail.com"
+              class="p-2 rounded-lg text-[var(--text-secondary)] hover:text-[var(--accent)] hover:bg-[var(--bg-surface)] transition-all"
+              title="Email">
+              <svg class="icon text-lg leading-none" aria-hidden="true"><use href="#i-mail"/></svg>
+            </a>
+          </div>
+
+          <!-- Toggles (Theme & Lang) -->
+          <div class="flex items-center gap-1.5 text-xs">
+            <a href="index.html" id="lang-toggle" aria-label="Passer en version française"
+              class="px-2 py-1 rounded bg-[var(--bg-surface)] text-[var(--text-secondary)] font-mono-code hover:text-[var(--text-primary)] transition-colors">
+              FR | <span class="text-[var(--accent)] font-semibold">EN</span>
+            </a>
+            <button id="theme-toggle" aria-label="Toggle theme"
+              class="p-1.5 rounded bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]">
+              <svg class="icon text-base" id="theme-icon" aria-hidden="true"><use href="#i-light_mode"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Scrollable Flow (Right) -->
+    <div class="flex-1 lg:pl-[320px] flex flex-col min-h-screen">
+      <main class="flex-1 max-w-[900px] w-full mx-auto px-6 sm:px-12 py-16 lg:py-20 flex flex-col gap-20">
+
+        <!-- SECTION 1: HERO & ABOUT -->
+        <section class="flex flex-col gap-6 pt-10 lg:pt-0 reveal active" id="hero">
+          <!-- Name & Title -->
+          <div class="flex flex-col gap-2">
+            <!-- H1 with Hover Reveal -->
+            <div class="name-reveal-container" title="Hover to reveal alias">
+              <h1
+                class="name-reveal-primary font-serif-title text-4xl sm:text-5xl font-medium tracking-tight text-[var(--accent)]">
+                Mélon Joanès AFAGNIBO
+              </h1>
+              <span
+                class="name-reveal-alias font-serif-title text-4xl sm:text-5xl font-medium tracking-tight text-[var(--accent)]">
+                ElFuegoX
+              </span>
+            </div>
+            <p class="text-lg sm:text-xl text-[var(--text-primary)] font-semibold mt-1">
+              Fullstack Web Developer · AI & Data Enthusiast
+            </p>
+          </div>
+
+          <!-- Bio (Left) + Portrait (Right) -->
+          <div class="flex flex-col sm:flex-row items-center sm:items-start gap-8">
+            <p class="flex-1 text-base sm:text-[17px] text-[var(--text-secondary)] leading-relaxed font-normal">
+              I am a 3rd-year undergraduate student in Artificial Intelligence at IFRI (University of Abomey-Calavi, Benin).
+              What matters to me is not piling on technologies for the sake of it, but choosing the right tool for the right
+              problem: a classical ML pipeline to classify a low-resource language, a RAG system where document retrieval
+              is paramount, or an n8n automation where a full model would be overkill. And when the priority is purely
+              product-driven, I build the complete application—from backend architecture to user interface. My goal is simple:
+              engineer reliable, well-crafted tools that deliver genuine value.
+            </p>
+
+            <!-- Personal Photo (Clickable with Lightbox Modal) -->
+            <button id="open-photo-modal" type="button" aria-label="Enlarge photo"
+              class="relative group shrink-0 cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded-2xl">
+              <div onclick="document.getElementById('photo-modal').showModal()"
+                class="w-64 h-72 sm:w-72 sm:h-80 md:w-80 md:h-96 rounded-2xl overflow-hidden border-2 border-[var(--border)] group-hover:border-[var(--accent)] transition-all duration-300 flame-glow bg-[var(--bg-surface)] flex items-center justify-center relative cursor-pointer">
+                <img src="moiIndaba.webp" alt="Mélon Joanès AFAGNIBO" width="775" height="1104" fetchpriority="high" decoding="sync"
+                  class="w-full h-full object-cover object-[50%_15%] group-hover:scale-105 transition-transform duration-500 ease-out"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                <div
+                  class="hidden flex-col items-center justify-center text-[var(--text-tertiary)] group-hover:text-[var(--accent)] transition-colors p-2 text-center">
+                  <svg class="icon text-3xl" aria-hidden="true"><use href="#i-account_circle"/></svg>
+                  <span class="text-[10px] font-mono-code mt-0.5 font-medium">Your Photo</span>
+                </div>
+              </div>
+            </button>
+          </div>
+        </section>
+
+        <div class="dashed-sep"></div>
+
+        <!-- SECTION 2: PROJECTS -->
+        <section class="flex flex-col gap-10 scroll-mt-20" id="projets">
+          <div class="reveal">
+            <h2 class="font-serif-title text-3xl sm:text-4xl font-medium text-[var(--text-primary)]">Featured Projects
+            </h2>
+          </div>
+
+          <!-- A. 4 Main Projects -->
+          <div class="flex flex-col gap-6">
+
+            <!-- Project 1 : XoNet -->
+            <div class="project-card rounded-2xl border border-[var(--border)] p-6 sm:p-8 flex flex-col gap-4 reveal">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span
+                  class="text-xs px-2.5 py-0.5 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20 dark:bg-orange-500/10 dark:text-[var(--accent)] dark:border-orange-500/20 font-mono-code font-medium">
+                  NLP & Machine Learning · AIoT Club IFRI
+                </span>
+                <span class="text-xs text-[var(--text-tertiary)] font-mono-code">In Progress (Active)</span>
+              </div>
+              <div>
+                <h3 class="text-xl sm:text-2xl font-bold text-[var(--text-primary)]">
+                  XoNet — Sentiment Classification & Fongbe Processing
+                </h3>
+              </div>
+              <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                Text analysis tools largely overlook low-resource African languages like Fongbe due to a lack of annotated datasets.
+                XoNet bridges this gap with a sentiment classifier and Fongbe-French translator trained on an 87,126-row parallel corpus.
+                To handle severe class imbalance, the pipeline combines TF-IDF vectorization, SMOTE resampling, and a Soft Voting ensemble model.
+              </p>
+              <div class="flex flex-wrap gap-2 pt-1 font-mono-code text-xs text-[var(--text-tertiary)]">
+                <span class="px-2.5 py-1 rounded bg-[var(--bg-body)] border border-[var(--border)]">Python</span>
+                <span class="px-2.5 py-1 rounded bg-[var(--bg-body)] border border-[var(--border)]">Scikit-Learn</span>
+                <span class="px-2.5 py-1 rounded bg-[var(--bg-body)] border border-[var(--border)]">SMOTE</span>
+                <span class="px-2.5 py-1 rounded bg-[var(--bg-body)] border border-[var(--border)]">Pandas</span>
+                <span class="px-2.5 py-1 rounded bg-[var(--bg-body)] border border-[var(--border)]">NLP</span>
+              </div>
+              <div class="pt-2 flex items-center gap-4 text-xs font-semibold text-[var(--accent)]">
+                <a href="https://github.com/ElFuegoX" target="_blank" rel="noopener noreferrer"
+                  class="hover:underline flex items-center gap-1">
+                  <svg class="icon text-sm" aria-hidden="true"><use href="#i-code"/></svg> GitHub Source Code
+                </a>
+              </div>
+            </div>
+
+            <!-- Project 2 : VoiceNote -->
+            <div class="project-card rounded-2xl border border-[var(--border)] p-6 sm:p-8 flex flex-col gap-4 reveal">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span
+                  class="text-xs px-2.5 py-0.5 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20 dark:bg-orange-500/10 dark:text-[var(--accent)] dark:border-orange-500/20 font-mono-code font-medium">
+                  Speech-to-Text & Web Architecture · Personal
+                </span>
+                <span class="text-xs text-emerald-400 font-mono-code">● Deployed in production</span>
+              </div>
+              <div>
+                <h3 class="text-xl sm:text-2xl font-bold text-[var(--text-primary)]">
+                  VoiceNote — Instant Voice Transcription & PWA
+                </h3>
+              </div>
+              <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                Taking a voice note should be as fast as speaking. VoiceNote is a Progressive Web App (PWA) ready to use
+                immediately without registration, featuring device-level local storage. Audio transcription is powered by
+                Whisper via Groq Cloud (~300ms ultra-low latency) paired with a local Faster-Whisper fallback to ensure high
+                availability even under network instability.
+              </p>
+              <div class="flex flex-wrap gap-2 pt-1 font-mono-code text-xs text-[var(--text-tertiary)]">
+                <span class="px-2.5 py-1 rounded bg-[var(--bg-body)] border border-[var(--border)]">React 18</span>
+                <span class="px-2.5 py-1 rounded bg-[var(--bg-body)] border border-[var(--border)]">TypeScript</span>
+                <span class="px-2.5 py-1 rounded bg-[var(--bg-body)] border border-[var(--border)]">Vite</span>
+                <span class="px-2.5 py-1 rounded bg-[var(--bg-body)] border border-[var(--border)]">FastAPI</span>
+                <span class="px-2.5 py-1 rounded bg-[var(--bg-body)] border border-[var(--border)]">Groq Whisper</span>
+                <span class="px-2.5 py-1 rounded bg-[var(--bg-body)] border border-[var(--border)]">Tailwind CSS</span>
+              </div>
+              <div class="pt-2 flex items-center gap-4 text-xs font-semibold text-[var(--accent)]">
+                <a href="https://voice-note-ebon.vercel.app" target="_blank" rel="noopener noreferrer"
+                  class="hover:underline flex items-center gap-1">
+                  <svg class="icon text-sm" aria-hidden="true"><use href="#i-open_in_new"/></svg> voice-note-ebon.vercel.app
+                </a>
+                <a href="https://github.com/ElFuegoX" target="_blank" rel="noopener noreferrer"
+                  class="hover:underline flex items-center gap-1 text-[var(--text-secondary)]">
+                  <svg class="icon text-sm" aria-hidden="true"><use href="#i-code"/></svg> GitHub
+                </a>
+              </div>
+            </div>
+
+            <!-- Project 3 : Lex & BRVM Copilot -->
+            <div class="project-card rounded-2xl border border-[var(--border)] p-6 sm:p-8 flex flex-col gap-4 reveal">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span
+                  class="text-xs px-2.5 py-0.5 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20 dark:bg-orange-500/10 dark:text-[var(--accent)] dark:border-orange-500/20 font-mono-code font-medium">
+                  Advanced RAG & Decision Systems · Personal
+                </span>
+                <span class="text-xs text-[var(--text-tertiary)] font-mono-code">Prototype / In Progress</span>
+              </div>
+              <div>
+                <h3 class="text-xl sm:text-2xl font-bold text-[var(--text-primary)]">
+                  Lex & BRVM Copilot — Regulatory & Financial RAG
+                </h3>
+              </div>
+              <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                Accessing legal frameworks (Benin Digital Code) and financial disclosures of companies in the WAEMU (UEMOA) region
+                is hindered by hundreds of dense PDF pages. This RAG system implements hybrid search (BM25 + dense embeddings) and
+                reranking to extract legal clauses and financial metrics without hallucinations, citing official sources systematically.
+              </p>
+              <div class="flex flex-wrap gap-2 pt-1 font-mono-code text-xs text-[var(--text-tertiary)]">
+                <span class="px-2.5 py-1 rounded bg-[var(--bg-body)] border border-[var(--border)]">Python</span>
+                <span class="px-2.5 py-1 rounded bg-[var(--bg-body)] border border-[var(--border)]">LangChain</span>
+                <span class="px-2.5 py-1 rounded bg-[var(--bg-body)] border border-[var(--border)]">FAISS</span>
+                <span class="px-2.5 py-1 rounded bg-[var(--bg-body)] border border-[var(--border)]">FastAPI</span>
+                <span class="px-2.5 py-1 rounded bg-[var(--bg-body)] border border-[var(--border)]">Groq API</span>
+                <span class="px-2.5 py-1 rounded bg-[var(--bg-body)] border border-[var(--border)]">Next.js</span>
+              </div>
+              <div class="pt-2 flex items-center gap-4 text-xs font-semibold text-[var(--accent)]">
+                <a href="https://github.com/ElFuegoX" target="_blank" rel="noopener noreferrer"
+                  class="hover:underline flex items-center gap-1">
+                  <svg class="icon text-sm" aria-hidden="true"><use href="#i-code"/></svg> GitHub Repository
+                </a>
+              </div>
+            </div>
+
+            <!-- Project 4 : Dimension AC -->
+            <div class="project-card rounded-2xl border border-[var(--border)] p-6 sm:p-8 flex flex-col gap-4 reveal">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span
+                  class="text-xs px-2.5 py-0.5 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20 dark:bg-orange-500/10 dark:text-[var(--accent)] dark:border-orange-500/20 font-mono-code font-medium">
+                  Full-Stack Production Platforms · Dimension AC
+                </span>
+                <span class="text-xs text-emerald-400 font-mono-code">● In Production</span>
+              </div>
+              <div>
+                <h3 class="text-xl sm:text-2xl font-bold text-[var(--text-primary)]">
+                  Dimension AC — DM Arena & DM Partners
+                </h3>
+              </div>
+              <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+                Engineering and deployment of web infrastructure for the clothing brand Dimension AC across two dedicated platforms:<br />
+                • <strong>DM Arena</strong>: Event platform handling online ticketing and real-time live event tracking.<br />
+                • <strong>DM Partners</strong>: Vendor marketplace empowering merchant partners to manage their storefront and track sales autonomously.
+              </p>
+              <div class="flex flex-wrap gap-2 pt-1 font-mono-code text-xs text-[var(--text-tertiary)]">
+                <span class="px-2.5 py-1 rounded bg-[var(--bg-body)] border border-[var(--border)]">React</span>
+                <span class="px-2.5 py-1 rounded bg-[var(--bg-body)] border border-[var(--border)]">Next.js</span>
+                <span class="px-2.5 py-1 rounded bg-[var(--bg-body)] border border-[var(--border)]">TypeScript</span>
+                <span class="px-2.5 py-1 rounded bg-[var(--bg-body)] border border-[var(--border)]">FastAPI</span>
+                <span class="px-2.5 py-1 rounded bg-[var(--bg-body)] border border-[var(--border)]">Supabase</span>
+              </div>
+              <div class="pt-2 flex flex-wrap items-center gap-4 text-xs font-semibold text-[var(--accent)]">
+                <a href="https://dm-arena1.vercel.app" target="_blank" rel="noopener noreferrer"
+                  class="hover:underline flex items-center gap-1">
+                  <svg class="icon text-sm" aria-hidden="true"><use href="#i-open_in_new"/></svg> dm-arena1.vercel.app
+                </a>
+                <a href="https://dm-partners.store" target="_blank" rel="noopener noreferrer"
+                  class="hover:underline flex items-center gap-1">
+                  <svg class="icon text-sm" aria-hidden="true"><use href="#i-open_in_new"/></svg> dm-partners.store
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- B. Autres Réalisations (Format Compact) -->
+          <div class="flex flex-col gap-4 pt-4 reveal">
+            <h4 class="text-sm font-semibold uppercase tracking-wider text-[var(--text-tertiary)] font-mono-code">
+              Other Highlights & Experiments
+            </h4>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <!-- Item 1: n8n -->
+              <div
+                class="p-5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border)] hover:border-[var(--accent)] transition-all flex flex-col justify-between gap-3">
+                <div class="flex flex-col gap-1.5">
+                  <span class="text-xs font-bold text-[var(--text-primary)]">Automations & AI (n8n)</span>
+                  <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
+                    Email classification pipelines (NovekAI), Telegram exchange rate alerts, eBay OAuth2 monitoring, and LLM integrations.
+                  </p>
+                </div>
+                <div class="flex flex-wrap gap-1 font-mono-code text-[11px] text-[var(--text-tertiary)]">
+                  <span>#n8n</span> · <span>#LLMs</span> · <span>#Webhooks</span>
+                </div>
+              </div>
+
+              <!-- Item 2: 100 Days of ML -->
+              <div
+                class="p-5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border)] hover:border-[var(--accent)] transition-all flex flex-col justify-between gap-3">
+                <div class="flex flex-col gap-1.5">
+                  <span class="text-xs font-bold text-[var(--text-primary)]">100 Days of ML Challenge</span>
+                  <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
+                    Implementation and training of 100 Machine & Deep Learning algorithms: regression, BERT, GPT, and GAN architectures.
+                  </p>
+                </div>
+                <a href="https://github.com/ElFuegoX/100DaysofML" target="_blank" rel="noopener noreferrer"
+                  class="text-xs font-medium text-[var(--accent)] hover:underline flex items-center gap-1 font-mono-code">
+                  <span>github.com/100DaysofML</span> →
+                </a>
+              </div>
+
+              <!-- Item 3: Thomas RAG -->
+              <div
+                class="p-5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border)] hover:border-[var(--accent)] transition-all flex flex-col justify-between gap-3">
+                <div class="flex flex-col gap-1.5">
+                  <span class="text-xs font-bold text-[var(--text-primary)]">Thomas — Biblical RAG</span>
+                  <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
+                    Semantic document search demonstrator on textual corpus, deployed with an interactive UI on Hugging Face Spaces.
+                  </p>
+                </div>
+                <a href="https://huggingface.co/spaces/ElFuegoX/Bible_bot" target="_blank" rel="noopener noreferrer"
+                  class="text-xs font-medium text-[var(--accent)] hover:underline flex items-center gap-1 font-mono-code">
+                  <span>HuggingFace Spaces</span> →
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="dashed-sep"></div>
+
+        <!-- SECTION 3: SOCLE TECHNIQUE (STACK DOCK) -->
+        <section class="flex flex-col gap-8 scroll-mt-20" id="stack">
+          <div class="reveal">
+            <h2 class="font-serif-title text-3xl sm:text-4xl font-medium text-[var(--text-primary)]">Core Tech Stack</h2>
+            <p class="text-sm text-[var(--text-secondary)] mt-1">The tools and technologies I work with daily.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Col 1: AI & Data -->
+            <div
+              class="flex flex-col gap-3 p-5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border)] reveal stagger-1">
+              <div class="flex items-center gap-2 pb-2 border-b border-[var(--border)]">
+                <span class="text-lg">🧠</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-[var(--text-primary)]">AI & Data</span>
+              </div>
+              <div class="dock-container pt-1">
+                <span class="dock-pill">Python</span>
+                <span class="dock-pill">PyTorch</span>
+                <span class="dock-pill">Scikit-learn</span>
+                <span class="dock-pill">LangChain</span>
+                <span class="dock-pill">FAISS / RAG</span>
+                <span class="dock-pill">Pandas / NumPy</span>
+                <span class="dock-pill">TensorFlow</span>
+              </div>
+            </div>
+
+            <!-- Col 2: Frontend -->
+            <div
+              class="flex flex-col gap-3 p-5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border)] reveal stagger-2">
+              <div class="flex items-center gap-2 pb-2 border-b border-[var(--border)]">
+                <span class="text-lg">🌐</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-[var(--text-primary)]">Frontend</span>
+              </div>
+              <div class="dock-container pt-1">
+                <span class="dock-pill">React 18</span>
+                <span class="dock-pill">Next.js</span>
+                <span class="dock-pill">TypeScript</span>
+                <span class="dock-pill">Tailwind CSS</span>
+                <span class="dock-pill">Vite</span>
+                <span class="dock-pill">Figma</span>
+              </div>
+            </div>
+
+            <!-- Col 3: Backend -->
+            <div
+              class="flex flex-col gap-3 p-5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border)] reveal stagger-3">
+              <div class="flex items-center gap-2 pb-2 border-b border-[var(--border)]">
+                <span class="text-lg">⚙️</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-[var(--text-primary)]">Backend</span>
+              </div>
+              <div class="dock-container pt-1">
+                <span class="dock-pill">FastAPI</span>
+                <span class="dock-pill">Supabase</span>
+                <span class="dock-pill">PostgreSQL</span>
+                <span class="dock-pill">Node.js</span>
+                <span class="dock-pill">REST APIs</span>
+                <span class="dock-pill">n8n</span>
+              </div>
+            </div>
+
+            <!-- Col 4: DevOps & Tools -->
+            <div
+              class="flex flex-col gap-3 p-5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border)] reveal stagger-4">
+              <div class="flex items-center gap-2 pb-2 border-b border-[var(--border)]">
+                <span class="text-lg">🔧</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-[var(--text-primary)]">DevOps & Tools</span>
+              </div>
+              <div class="dock-container pt-1">
+                <span class="dock-pill">Git / GitHub</span>
+                <span class="dock-pill">Docker</span>
+                <span class="dock-pill">GitHub Actions</span>
+                <span class="dock-pill">Linux / Bash</span>
+                <span class="dock-pill">Vercel</span>
+                <span class="dock-pill">Render</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="dashed-sep"></div>
+
+        <!-- SECTION 4: PARCOURS & EXPÉRIENCES (TIMELINE ALTERNÉE DE PART ET D'AUTRE) -->
+        <section class="flex flex-col gap-10 scroll-mt-20" id="parcours">
+          <div class="reveal">
+            <h2 class="font-serif-title text-3xl sm:text-4xl font-medium text-[var(--text-primary)]">Journey & Experience</h2>
+            <p class="text-sm text-[var(--text-secondary)] mt-1">Professional experience and academic background.</p>
+          </div>
+
+          <!-- Alternating Timeline Container -->
+          <div class="relative py-4" id="timeline-wrapper">
+            <!-- Central Spine (Desktop) / Left Line (Mobile) -->
+            <div
+              class="absolute left-4 md:left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-[var(--border)] to-transparent opacity-60">
+            </div>
+            <!-- Dynamic Glowing Laser Spine (Scroll-driven progress) -->
+            <div id="timeline-laser"
+              class="absolute left-4 md:left-1/2 -translate-x-1/2 top-0 w-[2px] h-0 bg-gradient-to-b from-[var(--accent)] via-[var(--flame)] to-[var(--accent)] shadow-[0_0_14px_var(--glow)] pointer-events-none rounded-full transition-all duration-100 ease-out z-0">
+            </div>
+
+            <div class="flex flex-col gap-12 sm:gap-14">
+
+              <!-- Item 1: NovekAI (LEFT) -->
+              <div class="timeline-item relative flex flex-col md:flex-row items-center w-full">
+                <!-- Center Dot -->
+                <div
+                  class="timeline-dot absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[var(--bg-body)] border-2 border-[var(--accent)] z-10 flame-glow">
+                </div>
+
+                <!-- Content Card (Left on Desktop) -->
+                <div class="timeline-card w-full md:w-[46%] ml-10 md:ml-0 md:mr-auto pl-2 md:pl-0 md:pr-8">
+                  <div
+                    class="p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border)] hover:border-[var(--accent)] transition-all flex flex-col gap-2 shadow-sm">
+                    <div class="flex flex-wrap items-center justify-between gap-1">
+                      <span
+                        class="text-xs font-mono-code text-[var(--accent)] font-semibold uppercase tracking-wider">June 2026 – July 2026</span>
+                      <span
+                        class="text-[11px] font-mono-code text-[var(--text-tertiary)] bg-[var(--bg-body)] px-2 py-0.5 rounded border border-[var(--border)]">ML Internship</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-[var(--text-primary)]">Machine Learning Intern · NovekAI</h3>
+                    <p class="text-xs text-[var(--text-secondary)] leading-relaxed mt-1">
+                      <strong>ML Pipeline & Predictive Analysis:</strong> Built an end-to-end modeling pipeline on event data: ingestion, data cleaning, feature engineering (historical performance metrics, probabilistic odds), and training classification and ranking models.<br />
+                      <strong>Automation:</strong> Internal chatbot and LLM-powered email processing automation via n8n.
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 pt-2 font-mono-code text-[11px] text-[var(--text-tertiary)]">
+                      <span class="px-2 py-0.5 rounded bg-[var(--bg-body)] border border-[var(--border)]">Python</span>
+                      <span class="px-2 py-0.5 rounded bg-[var(--bg-body)] border border-[var(--border)]">Pandas</span>
+                      <span
+                        class="px-2 py-0.5 rounded bg-[var(--bg-body)] border border-[var(--border)]">Scikit-Learn</span>
+                      <span class="px-2 py-0.5 rounded bg-[var(--bg-body)] border border-[var(--border)]">n8n</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 2: Dimension AC (RIGHT) -->
+              <div class="timeline-item relative flex flex-col md:flex-row items-center w-full">
+                <!-- Center Dot -->
+                <div
+                  class="timeline-dot absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[var(--bg-body)] border-2 border-[var(--accent)] z-10 flame-glow">
+                </div>
+
+                <!-- Content Card (Right on Desktop) -->
+                <div class="timeline-card w-full md:w-[46%] ml-10 md:ml-auto pl-2 md:pl-8">
+                  <div
+                    class="p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border)] hover:border-[var(--accent)] transition-all flex flex-col gap-2 shadow-sm">
+                    <div class="flex flex-wrap items-center justify-between gap-1">
+                      <span
+                        class="text-xs font-mono-code text-[var(--accent)] font-semibold uppercase tracking-wider">2025 – 2026</span>
+                      <span
+                        class="text-[11px] font-mono-code text-[var(--text-tertiary)] bg-[var(--bg-body)] px-2 py-0.5 rounded border border-[var(--border)]">Tech Leadership</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-[var(--text-primary)]">Co-Technical Director · Dimension AC</h3>
+                    <p class="text-xs text-[var(--text-secondary)] leading-relaxed mt-1">
+                      <strong>Software Architecture:</strong> End-to-end design and architecture of the brand's digital platforms: DM Arena (ticketing & live event tracking) and DM Partners (vendor marketplace).<br />
+                      <strong>Leadership:</strong> Developer coordination, code reviews, CI/CD, and deployment on Vercel and Supabase.
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 pt-2 font-mono-code text-[11px] text-[var(--text-tertiary)]">
+                      <span class="px-2 py-0.5 rounded bg-[var(--bg-body)] border border-[var(--border)]">Next.js</span>
+                      <span class="px-2 py-0.5 rounded bg-[var(--bg-body)] border border-[var(--border)]">FastAPI</span>
+                      <span
+                        class="px-2 py-0.5 rounded bg-[var(--bg-body)] border border-[var(--border)]">Supabase</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 3: IndabaX Bénin (LEFT) -->
+              <div class="timeline-item relative flex flex-col md:flex-row items-center w-full">
+                <!-- Center Dot -->
+                <div
+                  class="timeline-dot absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[var(--bg-body)] border-2 border-[var(--accent)] z-10 flame-glow">
+                </div>
+
+                <!-- Content Card (Left on Desktop) -->
+                <div class="timeline-card w-full md:w-[46%] ml-10 md:ml-0 md:mr-auto pl-2 md:pl-0 md:pr-8">
+                  <div
+                    class="p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border)] hover:border-[var(--accent)] transition-all flex flex-col gap-2 shadow-sm">
+                    <div class="flex flex-wrap items-center justify-between gap-1">
+                      <span
+                        class="text-xs font-mono-code text-[var(--accent)] font-semibold uppercase tracking-wider">2024 – 2026</span>
+                      <span
+                        class="text-[11px] font-mono-code text-[var(--text-tertiary)] bg-[var(--bg-body)] px-2 py-0.5 rounded border border-[var(--border)]">AI Volunteering</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-[var(--text-primary)]">Volunteer Organizer · IndabaX Benin</h3>
+                    <p class="text-xs text-[var(--text-secondary)] leading-relaxed mt-1">
+                      <strong>Commitment & Continuity:</strong> Active attendee in 2024/2025, subsequently joined the 2026 organizing committee.<br />
+                      <strong>Logistics & Operations:</strong> Scholar reception, accommodation, transport logistics, and on-site support during keynotes and hands-on workshops.
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 pt-2 font-mono-code text-[11px] text-[var(--text-tertiary)]">
+                      <span
+                        class="px-2 py-0.5 rounded bg-[var(--bg-body)] border border-[var(--border)]">Logistics</span>
+                      <span
+                        class="px-2 py-0.5 rounded bg-[var(--bg-body)] border border-[var(--border)]">Operations</span>
+                      <span class="px-2 py-0.5 rounded bg-[var(--bg-body)] border border-[var(--border)]">IndabaX</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 4: IFRI UAC (RIGHT) -->
+              <div class="timeline-item relative flex flex-col md:flex-row items-center w-full">
+                <!-- Center Dot -->
+                <div
+                  class="timeline-dot absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[var(--bg-body)] border-2 border-[var(--accent)] z-10 flame-glow">
+                </div>
+
+                <!-- Content Card (Right on Desktop) -->
+                <div class="timeline-card w-full md:w-[46%] ml-10 md:ml-auto pl-2 md:pl-8">
+                  <div
+                    class="p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border)] hover:border-[var(--accent)] transition-all flex flex-col gap-2 shadow-sm">
+                    <div class="flex flex-wrap items-center justify-between gap-1">
+                      <span
+                        class="text-xs font-mono-code text-[var(--accent)] font-semibold uppercase tracking-wider">2024 – 2027 (3rd Year)</span>
+                      <span
+                        class="text-[11px] font-mono-code text-[var(--text-tertiary)] bg-[var(--bg-body)] px-2 py-0.5 rounded border border-[var(--border)]">Education</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-[var(--text-primary)]">Bachelor in Artificial Intelligence · IFRI</h3>
+                    <p class="text-xs text-[var(--text-tertiary)]">University of Abomey-Calavi (UAC)</p>
+                    <p class="text-xs text-[var(--text-secondary)] leading-relaxed mt-1">
+                      <strong>Curriculum:</strong> Applied mathematics (linear algebra, probability, optimization), advanced algorithms, Machine & Deep Learning (NLP, Computer Vision), and software engineering.<br />
+                      <strong>AIoT Club:</strong> Active member — designed NLP pipelines (XoNet project) and led technical workshops.
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 pt-2 font-mono-code text-[11px] text-[var(--text-tertiary)]">
+                      <span class="px-2 py-0.5 rounded bg-[var(--bg-body)] border border-[var(--border)]">Machine Learning</span>
+                      <span class="px-2 py-0.5 rounded bg-[var(--bg-body)] border border-[var(--border)]">Software Engineering</span>
+                      <span class="px-2 py-0.5 rounded bg-[var(--bg-body)] border border-[var(--border)]">IFRI</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- FOOTER & CONNECT HUB (Rounded 3XL, Grand Margin-Top, Lueur feutrée) -->
+        <footer
+          class="mt-24 pt-14 pb-16 px-6 sm:px-10 rounded-3xl border border-dashed border-[var(--accent)]/40 bg-[var(--bg-surface)]/40 backdrop-blur-sm flex flex-col items-center gap-8 text-center reveal relative shadow-lg">
+          <!-- Ligne de lueur d'ambiance discrète sur le top border -->
+          <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-[var(--accent)]/50 to-transparent blur-[1px] pointer-events-none">
+          </div>
+          <!-- Connect Hub Header -->
+          <div class="flex flex-col items-center gap-1.5 max-w-md">
+            <span class="font-mono-code text-xs text-[var(--accent)] uppercase tracking-wider font-semibold">Connect & Collab</span>
+            <h3 class="font-serif-title text-2xl sm:text-3xl font-medium text-[var(--text-primary)]">Let's stay in touch</h3>
+            <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
+              Always open to engaging discussions, exciting opportunities, and research collaborations.
+            </p>
+          </div>
+
+          <!-- 3 Grandes Icônes Directes & Minimalistes -->
+          <div class="flex flex-wrap justify-center items-center gap-5 sm:gap-8">
+            <!-- Email -->
+            <a href="mailto:afagnibomelonjoanes@gmail.com"
+              class="p-5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border)] hover:border-[var(--accent)] hover:-translate-y-1.5 transition-all flex flex-col items-center gap-2 group w-32 sm:w-36 shadow-sm">
+              <svg
+                class="icon text-3xl text-[var(--text-secondary)] group-hover:text-[var(--accent)] transition-colors" aria-hidden="true"><use href="#i-mail"/></svg>
+              <span class="text-xs font-semibold text-[var(--text-primary)]">Email</span>
+            </a>
+
+            <!-- GitHub -->
+            <a href="https://github.com/ElFuegoX" target="_blank" rel="noopener noreferrer"
+              class="p-5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border)] hover:border-[var(--accent)] hover:-translate-y-1.5 transition-all flex flex-col items-center gap-2 group w-32 sm:w-36 shadow-sm">
+              <svg class="w-7 h-7 fill-[var(--text-secondary)] group-hover:fill-[var(--accent)] transition-colors"
+                viewBox="0 0 24 24">
+                <path
+                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+              </svg>
+              <span class="text-xs font-semibold text-[var(--text-primary)]">GitHub</span>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://linkedin.com/in/melon-joanes-afagnibo" target="_blank" rel="noopener noreferrer"
+              class="p-5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border)] hover:border-[var(--accent)] hover:-translate-y-1.5 transition-all flex flex-col items-center gap-2 group w-32 sm:w-36 shadow-sm">
+              <svg class="w-7 h-7 fill-[var(--text-secondary)] group-hover:fill-[var(--accent)] transition-colors"
+                viewBox="0 0 24 24">
+                <path
+                  d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451c.979 0 1.778-.773 1.778-1.729V1.73C24 .774 23.205 0 22.225 0z" />
+              </svg>
+              <span class="text-xs font-semibold text-[var(--text-primary)]">LinkedIn</span>
+            </a>
+          </div>
+
+          <!-- Flip Reveal Signature -->
+          <div class="text-xs text-[var(--text-tertiary)] flex items-center gap-1.5 flex-wrap justify-center pt-6">
+            <span>Designed & built by</span>
+            <div class="name-reveal-container" title="Hover to reveal alias">
+              <span class="name-reveal-primary font-semibold text-[var(--accent)]">Mélon Joanès AFAGNIBO</span>
+              <span class="name-reveal-alias font-semibold text-[var(--accent)]">ElFuegoX</span>
+            </div>
+            <span>· © 2026</span>
+          </div>
+        </footer>
+
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // 1. Initialize Lenis Smooth Scroll
+    let lenis;
+    if (typeof Lenis !== 'undefined') {
+      lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+      });
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+    }
+
+    // 2. Scroll Reveal Animations (IntersectionObserver)
+    // -- Live Local Time (Benin · UTC+1 / West Africa Time) --
+    const liveClock = document.getElementById('live-clock');
+    if (liveClock) {
+      const updateClock = () => {
+        try {
+          const now = new Date();
+          const timeStr = new Intl.DateTimeFormat('en-US', {
+            timeZone: 'Africa/Porto-Novo',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+          }).format(now);
+          liveClock.textContent = timeStr;
+        } catch (e) {
+          const d = new Date();
+          liveClock.textContent = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+        }
+      };
+      updateClock();
+      setInterval(updateClock, 10000);
+    }
+
+    // -- Stagger automatique : projets et timeline en one-by-one --
+
+    // Projets principaux : chaque carte reçoit un délai en cascade
+    const projectCards = document.querySelectorAll('#projets .project-card');
+    projectCards.forEach((card, i) => {
+      card.style.transitionDelay = `${i * 0.22}s`;
+    });
+
+    // Petites cartes projets secondaires
+    const miniCards = document.querySelectorAll('#projets .grid > div');
+    miniCards.forEach((card, i) => {
+      card.style.transitionDelay = `${i * 0.12}s`;
+    });
+
+    // Awwwards Ambient Spotlight Follower
+    window.addEventListener('mousemove', (e) => {
+      document.documentElement.style.setProperty('--cursor-x', `${e.clientX}px`);
+      document.documentElement.style.setProperty('--cursor-y', `${e.clientY}px`);
+    }, { passive: true });
+
+    // Observer pour les reveals généraux (titres, etc.)
+    const revealElements = document.querySelectorAll('.reveal');
+    const observerOptions = {
+      threshold: 0.12,
+      rootMargin: '-6% 0px -6% 0px'
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        } else {
+          entry.target.classList.remove('active');
+        }
+      });
+    }, observerOptions);
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Spine laser interactif : C'est la lumière qui allume et éteint les points & cartes en direct !
+    const timelineWrapper = document.getElementById('timeline-wrapper');
+    const timelineLaser = document.getElementById('timeline-laser');
+    const timelineItems = timelineWrapper ? timelineWrapper.querySelectorAll('.timeline-item') : [];
+
+    if (timelineWrapper && timelineLaser) {
+      let ticking = false;
+      const updateTimelineLaser = () => {
+        const rect = timelineWrapper.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        // La pointe du laser progresse quand le container est visible
+        const triggerPoint = windowHeight * 0.65;
+        const progress = triggerPoint - rect.top;
+        const totalHeight = rect.height;
+
+        const laserHeight = Math.max(0, Math.min(progress, totalHeight));
+        timelineLaser.style.height = `${laserHeight}px`;
+
+        // Position Y de la pointe du laser dans le viewport
+        const laserTipY = rect.top + laserHeight;
+
+        // Synchronisation millimétrique : la lumière allume le point dès qu'elle le touche
+        timelineItems.forEach(item => {
+          const dot = item.querySelector('.timeline-dot');
+          if (dot) {
+            const dotRect = dot.getBoundingClientRect();
+            const dotCenterY = dotRect.top + (dotRect.height / 2);
+
+            if (laserTipY >= dotCenterY - 4) {
+              item.classList.add('active');
+            } else {
+              item.classList.remove('active');
+            }
+          }
+        });
+
+        ticking = false;
+      };
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(updateTimelineLaser);
+          ticking = true;
+        }
+      }, { passive: true });
+
+      window.addEventListener('resize', () => {
+        requestAnimationFrame(updateTimelineLaser);
+      }, { passive: true });
+
+      updateTimelineLaser();
+    }
+
+    // 3. Theme Toggle Logic (avec bascule dynamique du logo flamme orange <-> bleu azur)
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+    const themeIcon = document.getElementById('theme-icon');
+    const themeIconMobile = document.getElementById('theme-icon-mobile');
+    const logoDesktop = document.getElementById('logo-desktop');
+    const logoMobile = document.getElementById('logo-mobile');
+    const siteFavicon = document.querySelector('link[rel="icon"]');
+
+    function applyTheme(isDark) {
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+        document.body.classList.add('dark');
+        document.body.classList.remove('light');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+        document.body.classList.remove('dark');
+        document.body.classList.add('light');
+      }
+
+      const logoSrc = isDark ? 'logo_mj.webp' : 'logo_mj_light.webp';
+      if (logoDesktop) logoDesktop.src = logoSrc;
+      if (logoMobile) logoMobile.src = logoSrc;
+      if (siteFavicon) siteFavicon.href = isDark ? 'favicon-dark.png' : 'favicon-light.png';
+
+      // En mode sombre → montrer soleil (pour indiquer qu'on peut passer au clair)
+      // En mode clair → montrer lune (pour indiquer qu'on peut passer au sombre)
+      const iconName = isDark ? 'light_mode' : 'dark_mode';
+      if (themeIcon) themeIcon.querySelector('use').setAttribute('href', '#i-' + iconName);
+      if (themeIconMobile) themeIconMobile.querySelector('use').setAttribute('href', '#i-' + iconName);
+
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      document.body.classList.add('theme-ready');
+    }
+
+    function toggleTheme() {
+      const currentlyDark = document.documentElement.classList.contains('dark');
+      applyTheme(!currentlyDark);
+    }
+
+    if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
+    if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+
+    // Initial theme check
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      applyTheme(false);
+    } else {
+      applyTheme(true);
+    }
+
+    // 4. Mobile Drawer Logic
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const closeDrawerBtn = document.getElementById('close-drawer-btn');
+    const mobileDrawer = document.getElementById('mobile-drawer');
+    const drawerLinks = document.querySelectorAll('.drawer-link');
+
+    if (mobileMenuBtn && mobileDrawer) {
+      mobileMenuBtn.addEventListener('click', () => mobileDrawer.classList.remove('hidden'));
+    }
+    if (closeDrawerBtn && mobileDrawer) {
+      closeDrawerBtn.addEventListener('click', () => mobileDrawer.classList.add('hidden'));
+    }
+    drawerLinks.forEach(link => {
+      link.addEventListener('click', () => mobileDrawer.classList.add('hidden'));
+    });
+
+    // 5. Scroll Spy Logic (01 Projets, 02 Stack, 03 Parcours)
+    const navLinks = document.querySelectorAll('#desktop-nav .nav-link');
+    const sections = [
+      document.getElementById('projets'),
+      document.getElementById('stack'),
+      document.getElementById('parcours')
+    ].filter(Boolean);
+
+    window.addEventListener('scroll', () => {
+      let currentSectionId = '';
+      const scrollPos = window.scrollY + 220;
+
+      sections.forEach(section => {
+        if (section.offsetTop <= scrollPos) {
+          currentSectionId = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href').replace('#', '');
+        if (href === currentSectionId) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    });
+
+    // 6. Photo Lightbox Modal
+    const photoModal = document.getElementById('photo-modal');
+    const openPhotoBtn = document.getElementById('open-photo-modal');
+    const closePhotoBtn = document.getElementById('close-photo-modal');
+
+    if (photoModal && openPhotoBtn) {
+      const openModal = () => {
+        photoModal.classList.remove('hidden');
+        photoModal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      };
+      const closeModal = () => {
+        photoModal.classList.add('hidden');
+        photoModal.classList.remove('flex');
+        document.body.style.overflow = '';
+      };
+
+      openPhotoBtn.addEventListener('click', openModal);
+      if (closePhotoBtn) closePhotoBtn.addEventListener('click', closeModal);
+      photoModal.addEventListener('click', (e) => {
+        if (e.target === photoModal) closeModal();
+      });
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !photoModal.classList.contains('hidden')) {
+          closeModal();
+        }
+      });
+    }
+  </script>
+
+  <!-- Photo Lightbox Modal Structure -->
+  <dialog id="photo-modal"
+    class="fixed inset-0 z-50 items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md transition-opacity duration-300">
+    <div
+      class="relative max-w-xl w-full bg-[var(--bg-surface)] border border-[var(--border)] rounded-3xl p-3 sm:p-4 shadow-2xl flex flex-col items-center animate-in fade-in zoom-in-95 duration-200">
+      <button id="close-photo-modal" type="button" aria-label="Close"
+        onclick="document.getElementById('photo-modal').close()"
+        class="absolute -top-3 -right-3 w-10 h-10 rounded-full bg-[var(--bg-surface)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--accent)] hover:border-[var(--accent)] flex items-center justify-center transition-colors shadow-xl z-20 cursor-pointer">
+        <svg class="icon text-xl" aria-hidden="true"><use href="#i-close"/></svg>
+      </button>
+      <div class="w-full max-h-[78vh] overflow-hidden rounded-2xl flex items-center justify-center bg-black/30">
+        <img src="moiIndaba.webp" alt="Mélon Joanès AFAGNIBO" width="775" height="1104" loading="lazy" decoding="async"
+          class="w-full h-auto max-h-[78vh] object-contain rounded-2xl" />
+      </div>
+      <div class="w-full flex items-center justify-between px-2 pt-3">
+        <p class="text-sm font-medium text-[var(--text-primary)]">Mélon Joanès AFAGNIBO</p>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- CV Viewer Modal Structure (Option C) -->
+  <dialog id="cv-modal"
+    class="p-0 rounded-3xl bg-transparent border-none outline-none backdrop:bg-black/85 backdrop:backdrop-blur-md m-auto max-w-4xl w-[94%] shadow-2xl"
+    onclick="if (event.target === this) this.close()">
+    <div
+      class="relative w-full bg-[var(--bg-surface)] border border-[var(--border)] rounded-3xl p-4 sm:p-6 shadow-2xl flex flex-col gap-4 animate-in fade-in zoom-in-95 duration-200">
+
+      <!-- En-tête de la visionneuse -->
+      <div class="flex items-center justify-between border-b border-[var(--border)] pb-3">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-xl bg-[var(--accent)]/10 border border-[var(--accent)]/20 flex items-center justify-center text-[var(--accent)]">
+            <svg class="icon text-2xl" aria-hidden="true"><use href="#i-picture_as_pdf"/></svg>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-[var(--text-primary)]">Curriculum Vitae</h3>
+            <p class="text-xs font-mono-code text-[var(--text-tertiary)]">Mélon Joanès AFAGNIBO</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="CV_Melon_Joanes_AFAGNIBO_FR.pdf" download="CV_Melon_Joanes_AFAGNIBO_FR.pdf"
+            class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[var(--bg-surface-hover)] hover:opacity-90 text-[var(--text-primary)] text-xs font-medium border border-[var(--border)] transition-all">
+            <svg class="icon text-sm" aria-hidden="true"><use href="#i-download"/></svg>
+            <span>FR Version</span>
+          </a>
+          <a href="CV_Melon_Joanes_AFAGNIBO_EN.pdf" download="CV_Melon_Joanes_AFAGNIBO_EN.pdf"
+            class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[var(--accent)] hover:opacity-90 text-white text-xs font-medium transition-all shadow-sm">
+            <svg class="icon text-sm" aria-hidden="true"><use href="#i-download"/></svg>
+            <span>EN Version</span>
+          </a>
+          <button type="button" aria-label="Close" onclick="document.getElementById('cv-modal').close()"
+            class="w-9 h-9 rounded-full bg-[var(--bg-surface)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--accent)] hover:border-[var(--accent)] flex items-center justify-center transition-colors shadow-sm cursor-pointer">
+            <svg class="icon text-xl" aria-hidden="true"><use href="#i-close"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Cadre d'affichage du PDF -->
+      <div
+        class="w-full h-[68vh] sm:h-[74vh] bg-[var(--bg-body)] rounded-2xl overflow-hidden border border-[var(--border)] relative">
+        <iframe src="CV_Melon_Joanes_AFAGNIBO_EN.pdf#view=FitH" class="w-full h-full rounded-2xl" frameborder="0">
+          <div class="w-full h-full flex flex-col items-center justify-center p-6 text-center gap-3">
+            <p class="text-sm text-[var(--text-primary)]">Direct preview not available in this browser.</p>
+            <a href="CV_Melon_Joanes_AFAGNIBO_EN.pdf" download="CV_Melon_Joanes_AFAGNIBO_EN.pdf"
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--accent)] text-white text-xs font-medium shadow-md">
+              <svg class="icon text-sm" aria-hidden="true"><use href="#i-download"/></svg>
+              <span>Download Resume</span>
+            </a>
+          </div>
+        </iframe>
+      </div>
+
+      <!-- Action Téléchargement Mobile -->
+      <div class="flex sm:hidden items-center gap-2 pt-1">
+        <a href="CV_Melon_Joanes_AFAGNIBO_FR.pdf" download="CV_Melon_Joanes_AFAGNIBO_FR.pdf"
+          class="flex-1 py-2.5 rounded-xl bg-[var(--bg-surface-hover)] border border-[var(--border)] text-[var(--text-primary)] text-xs font-semibold flex items-center justify-center gap-1.5">
+          <svg class="icon text-base" aria-hidden="true"><use href="#i-download"/></svg>
+          <span>FR</span>
+        </a>
+        <a href="CV_Melon_Joanes_AFAGNIBO_EN.pdf" download="CV_Melon_Joanes_AFAGNIBO_EN.pdf"
+          class="flex-1 py-2.5 rounded-xl bg-[var(--accent)] text-white text-xs font-semibold flex items-center justify-center gap-1.5">
+          <svg class="icon text-base" aria-hidden="true"><use href="#i-download"/></svg>
+          <span>EN</span>
+        </a>
+      </div>
+
+    </div>
+  </dialog>
+</body>
+
+</html>

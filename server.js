@@ -39,6 +39,9 @@ function cacheControlFor(ext) {
 const server = http.createServer((req, res) => {
   let cleanUrl = req.url.split('?')[0];
   let filePath = path.join(ROOT, cleanUrl === '/' ? 'index.html' : cleanUrl);
+  if (!path.extname(filePath) && fs.existsSync(filePath + '.html')) {
+    filePath += '.html';
+  }
 
   // Security check to prevent directory traversal
   if (!filePath.startsWith(ROOT)) {

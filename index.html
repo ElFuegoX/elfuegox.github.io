@@ -51,6 +51,9 @@
     content="Portfolio de Mélon Joanès AFAGNIBO — Étudiant IA à l'IFRI, développeur Full-Stack. Projets XoNet, VoiceNote, Thomas, DM Arena." />
   <meta name="author" content="Mélon Joanès AFAGNIBO" />
   <link rel="canonical" href="https://elfuegox.github.io/" />
+  <link rel="alternate" hreflang="fr" href="https://elfuegox.github.io/" />
+  <link rel="alternate" hreflang="en" href="https://elfuegox.github.io/en.html" />
+  <link rel="alternate" hreflang="x-default" href="https://elfuegox.github.io/" />
 
   <!-- Open Graph (LinkedIn, WhatsApp, Discord) -->
   <meta property="og:type" content="website" />
@@ -83,6 +86,10 @@
   <script defer src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
 
   <style>
+    @view-transition {
+      navigation: auto;
+    }
+
     :root {
       --bg-body: #0B0F14;
       --bg-surface: #111820;
@@ -579,11 +586,15 @@
   <header
     class="lg:hidden fixed top-0 left-0 right-0 z-40 bg-[var(--bg-body)]/90 backdrop-blur-md border-b border-[var(--border)] px-6 py-3 flex items-center justify-between">
     <div class="flex items-center gap-3">
-      <img id="logo-mobile" src="logo_mj.webp" alt="Logo MJ" width="32" height="32" decoding="async"
+      <img id="logo-mobile" src="logo_mj.webp" alt="Logo MJ" width="32" height="32" decoding="sync"
         class="w-8 h-8 rounded-lg object-cover border border-[var(--border)] shadow-sm" />
       <span class="font-bold text-sm text-[var(--text-primary)]">Mélon Joanès AFAGNIBO</span>
     </div>
     <div class="flex items-center gap-2">
+      <a href="en.html" id="lang-toggle-mobile" aria-label="Passer en version anglaise"
+        class="px-2 py-1 rounded-lg bg-[var(--bg-surface)] text-[var(--text-secondary)] font-mono-code text-xs hover:text-[var(--text-primary)] transition-colors">
+        <span class="text-[var(--accent)] font-semibold">FR</span> | EN
+      </a>
       <button id="theme-toggle-mobile" aria-label="Toggle theme"
         class="p-2 rounded-lg bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]">
         <svg class="icon text-lg" id="theme-icon-mobile" aria-hidden="true"><use href="#i-light_mode"/></svg>
@@ -645,7 +656,7 @@
         <!-- Logo MJ & Live Local Time (Awwwards Studio Status) -->
         <div class="flex items-center justify-between">
           <a href="#" class="block group" title="Mélon Joanès AFAGNIBO">
-            <img id="logo-desktop" src="logo_mj.webp" alt="Logo MJ" width="40" height="40" decoding="async"
+            <img id="logo-desktop" src="logo_mj.webp" alt="Logo MJ" width="40" height="40" decoding="sync"
               class="w-10 h-10 rounded-xl object-cover border border-[var(--border)] group-hover:border-[var(--accent)] transition-all duration-300 flame-glow" />
           </a>
           <div
@@ -758,10 +769,10 @@
 
           <!-- Toggles (Theme & Lang) -->
           <div class="flex items-center gap-1.5 text-xs">
-            <button id="lang-toggle"
-              class="px-2 py-1 rounded bg-[var(--bg-surface)] text-[var(--text-secondary)] font-mono-code hover:text-[var(--text-primary)]">
+            <a href="en.html" id="lang-toggle" aria-label="Passer en version anglaise"
+              class="px-2 py-1 rounded bg-[var(--bg-surface)] text-[var(--text-secondary)] font-mono-code hover:text-[var(--text-primary)] transition-colors">
               <span class="text-[var(--accent)] font-semibold">FR</span> | EN
-            </button>
+            </a>
             <button id="theme-toggle" aria-label="Toggle theme"
               class="p-1.5 rounded bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]">
               <svg class="icon text-base" id="theme-icon" aria-hidden="true"><use href="#i-light_mode"/></svg>
@@ -813,7 +824,7 @@
               class="relative group shrink-0 cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded-2xl">
               <div onclick="document.getElementById('photo-modal').showModal()"
                 class="w-64 h-72 sm:w-72 sm:h-80 md:w-80 md:h-96 rounded-2xl overflow-hidden border-2 border-[var(--border)] group-hover:border-[var(--accent)] transition-all duration-300 flame-glow bg-[var(--bg-surface)] flex items-center justify-center relative cursor-pointer">
-                <img src="moiIndaba.webp" alt="Mélon Joanès AFAGNIBO" width="775" height="1104" fetchpriority="high" decoding="async"
+                <img src="moiIndaba.webp" alt="Mélon Joanès AFAGNIBO" width="775" height="1104" fetchpriority="high" decoding="sync"
                   class="w-full h-full object-cover object-[50%_15%] group-hover:scale-105 transition-transform duration-500 ease-out"
                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
                 <div
@@ -842,7 +853,7 @@
             <div class="project-card rounded-2xl border border-[var(--border)] p-6 sm:p-8 flex flex-col gap-4 reveal">
               <div class="flex flex-wrap items-center justify-between gap-2">
                 <span
-                  class="text-xs px-2.5 py-0.5 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20 font-mono-code font-medium">
+                  class="text-xs px-2.5 py-0.5 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20 dark:bg-orange-500/10 dark:text-[var(--accent)] dark:border-orange-500/20 font-mono-code font-medium">
                   NLP & Machine Learning · Club AIoT IFRI
                 </span>
                 <span class="text-xs text-[var(--text-tertiary)] font-mono-code">En cours (Actif)</span>
@@ -878,7 +889,7 @@
             <div class="project-card rounded-2xl border border-[var(--border)] p-6 sm:p-8 flex flex-col gap-4 reveal">
               <div class="flex flex-wrap items-center justify-between gap-2">
                 <span
-                  class="text-xs px-2.5 py-0.5 rounded-full bg-orange-500/10 text-[var(--accent)] border border-orange-500/20 font-mono-code font-medium">
+                  class="text-xs px-2.5 py-0.5 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20 dark:bg-orange-500/10 dark:text-[var(--accent)] dark:border-orange-500/20 font-mono-code font-medium">
                   Speech-to-Text & Web Architecture · Personnel
                 </span>
                 <span class="text-xs text-emerald-400 font-mono-code">● Déployé en production</span>
@@ -918,7 +929,7 @@
             <div class="project-card rounded-2xl border border-[var(--border)] p-6 sm:p-8 flex flex-col gap-4 reveal">
               <div class="flex flex-wrap items-center justify-between gap-2">
                 <span
-                  class="text-xs px-2.5 py-0.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 font-mono-code font-medium">
+                  class="text-xs px-2.5 py-0.5 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20 dark:bg-orange-500/10 dark:text-[var(--accent)] dark:border-orange-500/20 font-mono-code font-medium">
                   RAG Avancé & Systèmes Décisionnels · Personnel
                 </span>
                 <span class="text-xs text-[var(--text-tertiary)] font-mono-code">Prototype / En cours</span>
@@ -954,7 +965,7 @@
             <div class="project-card rounded-2xl border border-[var(--border)] p-6 sm:p-8 flex flex-col gap-4 reveal">
               <div class="flex flex-wrap items-center justify-between gap-2">
                 <span
-                  class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono-code font-medium">
+                  class="text-xs px-2.5 py-0.5 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20 dark:bg-orange-500/10 dark:text-[var(--accent)] dark:border-orange-500/20 font-mono-code font-medium">
                   Plateformes Full-Stack en Production · Dimension AC
                 </span>
                 <span class="text-xs text-emerald-400 font-mono-code">● En production</span>
